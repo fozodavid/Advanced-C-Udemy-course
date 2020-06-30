@@ -1,0 +1,9 @@
+Originally input/output were not part of the definition of C
+  the Unix implementation of C has served as a model for these functions
+
+three files are automatically opened by the system for use by the program:
+  stdin, stdout, stderr defined in <stdio.h>
+
+  stdin is the terminal window
+  stdout also terminal window
+  stderr most of the error messages are written to this file also terminal

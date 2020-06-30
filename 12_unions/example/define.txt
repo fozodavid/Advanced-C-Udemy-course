@@ -1,0 +1,112 @@
+// union is a derived type
+// similar to structures with members which share the same storage space
+//
+// used to save space and for alternating data
+// union does not waste storage on variables that are not being used
+//
+// each element in a union is called a member (just like a struct)
+//
+// you can define a union with many members
+// * only one member can contain a value at any given time, so only one access of a member
+// at a given time
+//
+// the members of a union can be of any data type
+// referencing data in a union with a variable of the wrong type is a logic error
+//
+// operations that can be performed on a union are
+// * assigning a union to another union of the same type
+// * taking the address (&) of a union variable
+// * accessing union members
+//
+// unions are particularly useful in embedded programming
+// * situations where direct access to the hardware/memory is needed
+//
+// use a union to represent a table that stores a mixture of types in some order
+//
+// you could create an array of unions that store equal-sized units
+// * each of which can hold a variety of data types
+//
+// union could represent a file containing different record types
+//
+// a union could represent a network interface containing different request types
+//
+// memory allocation
+// * one common storage space for all its members
+// * the union is created with enough space for its largest field
+//
+// example: union called quantity, with fields count, weight and volume
+// * whether you set the count, weight, or volume field, the data will go into
+// the same space in memory
+// you can only set count or weight or volume and each override the other?
+//
+// structs vs unions
+//
+// although unions are similar to structures, they are used entirely different situations
+//
+// use a structure when your construct is a group of other things
+//
+// use a union when your construct can be one of many different things but only one at a time
+//
+// unions are typically used in situations where space is premium but 
+// more importantly for exclusively alternate data (only assigning and accessing one element)
+//
+// unions ensure that mutually exclusive states remain mutually exclusive
+//
+// unions share a common storage space where structures store several data types simultaneously
+// * a structure can hold an int and a double and a char
+// * a union can hold an int or a double or a char
+/*
+#include <stdio.h>
+
+union car {
+  int i_value;
+  float f_value;
+};
+
+union bus {
+  int i_value;
+  float f_value;
+} bus1, bus2, *bus3; // global scope
+
+// C11 anonymous unions: unnamed memory union of a structure
+
+int main() {
+  union car car1, car2, *car3;
+  printf("Memory size occupied by data: %zu\n", sizeof(car1));
+  return 0;
+}
+*/
+
+#include <stdio.h>
+#define ENTRIES 40
+
+struct owner {
+  char socsecurity[12];
+};
+
+struct leasecompany {
+  char name[40];
+  char headquarters[40];
+};
+
+struct car_data {
+  char make[15];
+  int status; /* 0 = owned, 1 = leased */
+  union {
+    struct owner owncar;
+    struct leasecompany leasecar;
+  };
+};
+
+// ANOTHER EXAMPLE
+
+
+struct {
+  char *name;
+  enum symbolType type;
+  union {
+    int i;
+    float f;
+    char c;
+  } data;
+} table [ENTRIES];
