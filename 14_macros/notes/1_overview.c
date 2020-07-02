@@ -37,7 +37,7 @@
   printf("value a = %d\n", a); \
   printf("value b = %d\n", b);
 
-int main() {
+int main2() {
   int x = 2;
   int y = 3;
   PRNT(x, y);
